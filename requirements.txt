@@ -1,1 +1,2 @@
 git+https://github.com/jnsougata/discohook.git@ebdf09 # stable version
+uvicorn==0.24.0.post1
