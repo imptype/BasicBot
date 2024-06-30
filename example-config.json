@@ -1,0 +1,7 @@
+{
+    "DISCORD_APPLICATION_ID" : "",
+    "DISCORD_PUBLIC_KEY" : "",
+    "DISCORD_BOT_TOKEN" : "",
+    "ERROR_LOG_WEBHOOK" : "",
+    "SYNC_PASSWORD" : ""
+}
