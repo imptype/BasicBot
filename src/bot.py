@@ -1,4 +1,5 @@
 import os
+import asyncio
 import datetime
 import traceback
 import contextlib
@@ -16,7 +17,7 @@ def run():
     # async with aiohttp.ClientSession() as app.session:
     #   async with Database(app, os.getenv('SPACE_DATA_KEY')) as app.db:
     await app.http.session.close() # close bot session
-    app.http.session = aiohttp.ClientSession('https://discord.com') # create session on current event loop
+    app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
     try:
       yield
     except asyncio.CancelledError:
