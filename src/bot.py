@@ -40,14 +40,14 @@ def run():
   error_log_webhook = discohook.PartialWebhook.from_url(app, os.getenv('ERROR_LOG_WEBHOOK'))
   @app.on_interaction_error()
   async def on_error(interaction, error):
-    if interaction.responded:
-      await interaction.response.followup('Sorry, an error has occurred (after responding).')
-    else:
-      await interaction.response.send('Sorry, an error has occurred.')
     trace = tuple(traceback.TracebackException.from_exception(error).format())
     app.errors.append(trace)
     text = ''.join(trace)
     print(text)
+    if interaction.responded:
+      await interaction.response.followup('Sorry, an error has occurred (after responding).')
+    else:
+      await interaction.response.send('Sorry, an error has occurred.')
     await error_log_webhook.send(text[:2000])
 
   # Set bot started at timestamp
