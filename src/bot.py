@@ -2,6 +2,7 @@ import os
 import datetime
 import traceback
 import contextlib
+import aiohttp
 import discohook
 from starlette.responses import JSONResponse
 from .cogs.ping import ping_command
@@ -14,6 +15,8 @@ def run():
   async def lifespan(app):
     # async with aiohttp.ClientSession() as app.session:
     #   async with Database(app, os.getenv('SPACE_DATA_KEY')) as app.db:
+    await app.http.session.close() # close bot session
+    app.http.session = aiohttp.ClientSession('https://discord.com') # create session on current event loop
     try:
       yield
     except asyncio.CancelledError:
