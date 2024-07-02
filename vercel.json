@@ -2,7 +2,7 @@
     "builds": [
       {
         "src": "main.py",
-        "use": "@imptype/vercel-python@4.3.7"
+        "use": "@imptype/vercel-python@4.3.8"
       }
     ],
     "routes": [
