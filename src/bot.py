@@ -32,7 +32,7 @@ def run():
     #   async with Database(app, os.getenv('SPACE_DATA_KEY')) as app.db:
     await app.http.session.close() # close bot session
     app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
-    app.used_lifespan = datetime.datetime.utcnow()
+    app.start_lifespan = datetime.datetime.utcnow()
     try:
       yield
     except asyncio.CancelledError:
@@ -40,6 +40,7 @@ def run():
     else:
       print('Closed without errors.')
     finally:
+      app.stop_lifespan = datetime.datetime.utcnow()
       await app.http.session.close() # close bot session
 
   # Define the bot
@@ -69,7 +70,8 @@ def run():
 
   # Set bot started at timestamp
   app.started_at = datetime.datetime.utcnow()
-  app.used_lifespan = False
+  app.start_lifespan = False
+  app.stop_lifespan = False
 
   # Set if bot is test or not
   app.test = bool(os.getenv('test'))
@@ -86,7 +88,8 @@ def run():
       'Started' : str(app.started_at),
       'Now' : str(datetime.datetime.utcnow()),
       'Test' : app.test,
-      'Used lifespan' : str(app.used_lifespan),
+      'Start lifespan' : str(app.start_lifespan),
+      'Stop lifespan' : str(app.stop_lifespan),
       'Errors' : app.errors
     })
 
