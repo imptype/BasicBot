@@ -53,6 +53,8 @@ def run():
     #middleware = [Middleware(CustomMiddleware)]
   )
 
+  #app.router.lifespan_context
+
   # Attach error handler
   app.errors = []
   error_log_webhook = discohook.PartialWebhook.from_url(app, os.getenv('ERROR_LOG_WEBHOOK'))
@@ -90,6 +92,7 @@ def run():
       'Test' : app.test,
       'Start lifespan' : str(app.start_lifespan),
       'Stop lifespan' : str(app.stop_lifespan),
+      'loop' : str(id(asyncio.get_running_loop())),
       'Errors' : app.errors
     })
 
