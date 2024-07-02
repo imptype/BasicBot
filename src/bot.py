@@ -15,10 +15,11 @@ class CustomMiddleware(BaseHTTPMiddleware):
   check = False
   async def dispatch(self, request, call_next): # keeps session open until request is completed, 10 seconds
     # run once
+    print('recieve request')
     if not self.check:
       self.check = True
-      await app.http.session.close() # close bot session
-      app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
+      await request.app.http.session.close() # close bot session
+      request.app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
     return await call_next(request)
 
 def run():
