@@ -32,7 +32,7 @@ def run():
     #   async with Database(app, os.getenv('SPACE_DATA_KEY')) as app.db:
     await app.http.session.close() # close bot session
     app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
-    app.used_lifespan = True
+    app.used_lifespan = datetime.datetime.utcnow()
     try:
       yield
     except asyncio.CancelledError:
@@ -84,8 +84,9 @@ def run():
   async def root(request):
     return JSONResponse({
       'Started' : str(app.started_at),
+      'Now' : str(datetime.datetime.utcnow()),
       'Test' : app.test,
-      'Used lifespan' : app.used_lifespan,
+      'Used lifespan' : str(app.used_lifespan),
       'Errors' : app.errors
     })
 
