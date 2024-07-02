@@ -8,6 +8,19 @@ import discohook
 from starlette.responses import JSONResponse
 from .cogs.ping import ping_command
 
+from starlette.middleware import Middleware
+from starlette.middleware.base import BaseHTTPMiddleware
+
+class CustomMiddleware(BaseHTTPMiddleware):
+  check = False
+  async def dispatch(self, request, call_next): # keeps session open until request is completed, 10 seconds
+    # run once
+    if not self.check:
+      self.check = True
+      await app.http.session.close() # close bot session
+      app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
+    return await call_next(request)
+
 def run():
 
   # Lifespan to gracefully shutdown, which only happens during local testing
@@ -33,7 +46,8 @@ def run():
     public_key = os.getenv('DISCORD_PUBLIC_KEY'),
     token = os.getenv('DISCORD_BOT_TOKEN'),
     password = os.getenv('SYNC_PASSWORD'),
-    lifespan = lifespan
+    lifespan = lifespan,
+    middleware = [Middleware(CustomMiddleware)]
   )
 
   # Attach error handler
