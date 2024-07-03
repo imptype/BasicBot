@@ -8,15 +8,15 @@ import discohook
 from starlette.responses import JSONResponse
 from .cogs.ping import ping_command
 
-from starlette.middleware import Middleware
-from starlette.middleware.base import BaseHTTPMiddleware
+# from starlette.middleware import Middleware
+# from starlette.middleware.base import BaseHTTPMiddleware
 
 # class CustomMiddleware(BaseHTTPMiddleware):
 #   check = False
 #   async def dispatch(self, request, call_next):
 #     # run once
-#     print('recieve request')
 #     if not self.check:
+#       sync(request)
 #       self.check = True
 #       await request.app.http.session.close() # close bot session
 #       request.app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
@@ -52,8 +52,6 @@ def run():
     lifespan = lifespan#,
     #middleware = [Middleware(CustomMiddleware)]
   )
-
-  #app.router.lifespan_context
 
   # Attach error handler
   app.errors = []
