@@ -8,28 +8,12 @@ import discohook
 from starlette.responses import JSONResponse
 from .cogs.ping import ping_command
 
-# from starlette.middleware import Middleware
-# from starlette.middleware.base import BaseHTTPMiddleware
-
-# class CustomMiddleware(BaseHTTPMiddleware):
-#   check = False
-#   async def dispatch(self, request, call_next):
-#     # run once
-#     if not self.check:
-#       sync(request)
-#       self.check = True
-#       await request.app.http.session.close() # close bot session
-#       request.app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
-#     return await call_next(request)
-
 def run():
 
   # Lifespan to gracefully shutdown, which only happens during local testing
   # This can also be used to setup .session and .db attributes
   @contextlib.asynccontextmanager
   async def lifespan(app):
-    # async with aiohttp.ClientSession() as app.session:
-    #   async with Database(app, os.getenv('SPACE_DATA_KEY')) as app.db:
     await app.http.session.close() # close bot session
     app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
     app.start_lifespan = '{}-{}'.format(datetime.datetime.utcnow(), id(asyncio.get_running_loop()))
@@ -49,8 +33,7 @@ def run():
     public_key = os.getenv('DISCORD_PUBLIC_KEY'),
     token = os.getenv('DISCORD_BOT_TOKEN'),
     password = os.getenv('SYNC_PASSWORD'),
-    lifespan = lifespan#,
-    #middleware = [Middleware(CustomMiddleware)]
+    lifespan = lifespan
   )
 
   # Attach error handler
