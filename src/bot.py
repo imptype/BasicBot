@@ -80,8 +80,7 @@ def run():
   # Attach /stop route for debugging
   @app.route('/stop', methods = ['GET'])
   async def stop(request):
-    import os
-    os._exit(1)
+    asyncio.get_event_loop().stop()
     return JSONResponse({'code' : 200})
 
   # Return app object
