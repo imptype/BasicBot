@@ -1,2 +1,2 @@
-git+https://github.com/imptype/discohook.git@patch-43 # stable version
+git+https://github.com/jnsougata/discohook.git@ebdf09a # stable version
 uvicorn==0.24.0.post1
