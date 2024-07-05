@@ -16,17 +16,13 @@ def run():
   async def lifespan(app):
     await app.http.session.close() # close bot session
     app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
-    app.start_lifespan = '{}-{}'.format(datetime.datetime.utcnow(), id(asyncio.get_running_loop()))
     try:
-      print('enter lifespan context')
       yield
     except BaseException as e:
       print('Ignoring lifespan exception:', e, repr(e))
-      print(''.join(traceback.TracebackException.from_exception(e).format()))
     else:
       print('Closed without errors.')
     finally:
-      app.stop_lifespan = '{}-{}'.format(datetime.datetime.utcnow(), id(asyncio.get_running_loop()))
       await app.http.session.close() # close bot session
 
   # Define the bot
@@ -55,8 +51,6 @@ def run():
 
   # Set bot started at timestamp
   app.started_at = datetime.datetime.utcnow()
-  app.start_lifespan = False
-  app.stop_lifespan = False
 
   # Set if bot is test or not
   app.test = bool(os.getenv('test'))
@@ -73,18 +67,8 @@ def run():
       'Started' : str(app.started_at),
       'Now' : str(datetime.datetime.utcnow()),
       'Test' : app.test,
-      'Start lifespan' : str(app.start_lifespan),
-      'Stop lifespan' : str(app.stop_lifespan),
-      'Lifespan debug' : getattr(app, '__lifespan_debug', []),
-      'loop' : str(id(asyncio.get_running_loop())),
       'Errors' : app.errors
     })
-
-  # Attach /stop route for debugging
-  @app.route('/stop', methods = ['GET'])
-  async def stop(request):
-    asyncio.get_event_loop().stop()
-    return JSONResponse({'code' : 200})
 
   # Return app object
   return app
