@@ -18,9 +18,10 @@ def run():
     app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
     app.start_lifespan = '{}-{}'.format(datetime.datetime.utcnow(), id(asyncio.get_running_loop()))
     try:
+      print('enter lifespan context')
       yield
-    except asyncio.CancelledError:
-      print('Ignoring cancelled error.')
+    except BaseException as e:
+      print('Ignoring lifespan exception:', e)
     else:
       print('Closed without errors.')
     finally:
