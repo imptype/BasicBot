@@ -21,7 +21,8 @@ def run():
       print('enter lifespan context')
       yield
     except BaseException as e:
-      print('Ignoring lifespan exception:', e)
+      print('Ignoring lifespan exception:', e, repr(e))
+      print(''.join(traceback.TracebackException.from_exception(e).format()))
     else:
       print('Closed without errors.')
     finally:
