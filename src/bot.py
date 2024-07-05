@@ -10,20 +10,15 @@ from .cogs.ping import ping_command
 
 def run():
 
-  # Lifespan to gracefully shutdown, which only happens during local testing
-  # This can also be used to setup .session and .db attributes
+  # Lifespan can also be used to async setup .session and .db attributes
+  # https://www.starlette.io/lifespan
   @contextlib.asynccontextmanager
   async def lifespan(app):
-    await app.http.session.close() # close bot session
-    app.http.session = aiohttp.ClientSession('https://discord.com', loop = asyncio.get_running_loop()) # create session on current event loop
     try:
       yield
-    except BaseException as e:
-      print('Ignoring lifespan exception:', e, repr(e))
-    else:
-      print('Closed without errors.')
     finally:
-      await app.http.session.close() # close bot session
+      if app.http.session: # close bot session
+        await app.http.session.close() 
 
   # Define the bot
   app = discohook.Client(
