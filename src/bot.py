@@ -73,6 +73,7 @@ def run():
       'Test' : app.test,
       'Start lifespan' : str(app.start_lifespan),
       'Stop lifespan' : str(app.stop_lifespan),
+      'Lifespan debug' : getattr(app, '__lifespan_debug', []),
       'loop' : str(id(asyncio.get_running_loop())),
       'Errors' : app.errors
     })
