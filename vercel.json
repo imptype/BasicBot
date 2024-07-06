@@ -1,14 +1,14 @@
 {
-    "builds": [
-      {
-        "src": "main.py",
-        "use": "@imptype/vercel-python@4.3.32"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "main.py"
-      }
-    ]
-  }
+  "builds": [
+    {
+      "src": "main.py",
+      "use": "@imptype/vercel-python@4.3.34"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "main.py"
+    }
+  ]
+}
