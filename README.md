@@ -71,7 +71,7 @@ Invite the bot and test the features: https://discord.com/oauth2/authorize?clien
          - Search "Edit the system environment variables" in Windows search and click it.
          - Click Environment Variables, under System variables select the Path variable and click Edit.
          - Click New, paste the file path of the folder like `C:\Program Files\Ngrok\bin` and click Ok.
-         - You may need to whitelist it via Windows Security ➔ Protection History ➔ Find it and click Allow.
+         - You may need to whitelist it via Windows Security ➔ Protection History ➔ Find and click Allow.
        - Linux: Run this [one command](https://ngrok.com/docs/getting-started/?os=linux) in Terminal:
          ```bash
          curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | \
@@ -82,12 +82,12 @@ Invite the bot and test the features: https://discord.com/oauth2/authorize?clien
          ```
      - Find your Ngrok token from dashboard and then run `ngrok config add-authtoken <token>` in Terminal.
      - P.S. Discord recommends using Ngrok for local development in their official [JavaScript Tutorial](https://discord.com/developers/docs/quick-start/getting-started#:~:text=ngrok).
-     - NOTE: Ngrok's Free Tier has a 60 requests/min ratelimit. If you need a higher one, use [Cloudflare Tunnels](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel).
+     - NOTE: Ngrok's Free Tier has a 60 requests/min ratelimit. For a higher one, use [Cloudflare Tunnels](https://developers.cloudflare.com/pages/how-to/preview-with-cloudflare-tunnel).
 
 2. [Clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) this repository.
    - Git:
      - Open Terminal at the location you want your project to be like `C:\Users\imp\Documents\Projects`.
-       - An easy way is open File Explorer to that location, right-click an empty space and click Open in Terminal.
+       - You can open File Explorer to that location, right-click an empty space and click Open in Terminal.
      - Run `git clone https://github.com/imptype/BasicBot` to copy this repo into a `BasicBot` folder.
    - Github Desktop:
      - Open GitHub Desktop (and login if not already) and select File ➔ Clone Repository ➔ URL
@@ -103,7 +103,7 @@ Invite the bot and test the features: https://discord.com/oauth2/authorize?clien
    - `DISCORD_BOT_TOKEN` is your Discord Bot Token, **don't share it!**
    - `ERROR_LOG_WEBHOOK` is a Discord webhook URL that relays error messages your bot encounters.
      - Discord channel settings ➔ Integrations ➔ New Webhook ➔ Copy Webhook URL.
-   - `SYNC_PASSWORD` is a password set by you and you type it when you visit the route to sync commands later on.
+   - `SYNC_PASSWORD` is a password set by you and you type it when you sync commands later on.
 
 5. Install requirements. A venv is recommended.
    - Run `python -m venv venv` to create a venv folder.
@@ -125,7 +125,7 @@ Invite the bot and test the features: https://discord.com/oauth2/authorize?clien
    - Now anyone on the internet can visit this URL and see your website, including Discord's API.
    - You can do CTRL+C to stop running.
 
-8. Set the Interactions Endpoint URL to `<url>/interactions` where `url` is your Ngrok url.
+8. Set the Interactions Endpoint URL to `<url>/interactions` where `url` is your Ngrok URL.
    - This is located in General Information of your app's [Discord developers](https://discord.com/developers/applications) page.
    - `discohook` recieves Discord interactions/requests by default through the `/interactions` route.
    - Make sure your Uvicorn server and Ngrok proxy are still running or it will fail to set.
@@ -157,7 +157,7 @@ Remember:
      - Set your Git configuration:
        - Run `git config user.email "your-email@example.com"`
        - Run `git config user.name "Your Name"`
-     - Add your GitHub repository as a remote with `git remote add origin https://github.com/your-username/your-repo.git`.
+     - Run `git remote add origin https://github.com/your-username/your-repo.git` to link them.
      - Stage your files with `git add .` and commit them with `git commit -m "Initial commit"`.
      - Push your changes to GitHub with `git push -u origin main`.
    - GitHub Desktop:
@@ -165,24 +165,24 @@ Remember:
      - Choose the `BasicBot` folder and follow the prompts to create a new repository.
 
 2. [Login to Vercel](https://vercel.com/login) and add your GitHub repository.
-   - Dashboard ➔ Add New ➔ Project ➔ Adjust Github App Permissions ➔ Auth ➔ Select Repo ➔ Save ➔ Import your repo.
+   - Dashboard ➔ Add New ➔ Project ➔ Adjust Github App Permissions ➔ Auth ➔ Select then Import.
    - Set Build Command to `uvicorn main:app`.
    - Set Install Command to `pip install -r requirements.txt`.
    - Paste all your environment variables from `config.json` into Environment Variables and click Deploy.
    - NOTE: `vercel.json` uses an edited version of the NPM package `@vercel/python` to fix event loop issues.
 
-3. Set the Interactions Endpoint URL to `<url>/interactions` where `url` is your Vercel url.
-   - Once deployed, click your preview URL to know what your `123123123.vercel.app` URL is.
+3. Set the Interactions Endpoint URL to `<url>/interactions` where `url` is your Vercel URL.
+   - Once deployed, click your preview box to know what your `123123123.vercel.app` URL is.
 
-Your bot is now online 24/7 in a **serverless** environment. Cold start times are under 3 seconds, so your bot will reply in time to interactions!
+Your bot is now online 24/7 in a **serverless** environment. Cold starts are < 3 seconds, so your bot will reply in time!
 
 Some things to note:  
 &nbsp;&nbsp;➔ Serverless means cache will not retain after ~5 minutes of inactivity.  
-&nbsp;&nbsp;➔ You also can't do things that require a persistent websocket, like listening for traditional message/voice/member/guild events.  
+&nbsp;&nbsp;➔ You also can't do things that require a persistent websocket, like listening for message/voice/member/guild events.  
 &nbsp;&nbsp;➔ You may want to use 2 bots, 1 is a test bot with dev credentials locally, the other with prod credentials on Vercel.
 
 ### Now make it your own!
-BasicBot is just a demonstration, so feel free to change the name and add more commands and do whatever you want. If you need inspiration for things to add or to know what's possible, check out the [discohook/examples][3] folder, which contains a lot of simple examples like modals, buttons, slash command arguments, etc. You can also check out [MazeRace][4], a small Discord bot that shows how to do things like storing variables inside of custom IDs, image generation, nested and persistent views, and uses a simple database.
+BasicBot is just a demonstration, so feel free to change the name and add more commands and do whatever you want. If you need inspiration for things to add or to know what's possible, check out the [discohook/examples](https://github.com/jnsougata/discohook/tree/main/examples) folder, which contains a lot of simple examples like modals, buttons, slash command arguments, etc. You can also check out [MazeRace](https://github.com/imptype/MazeRace), a small Discord bot that shows how to do things like storing variables inside of custom IDs, image generation, nested and persistent views, and uses a simple database.
 
 # Links and Resources
 - **Discohook Discord:** https://discord.gg/xEEpJvE9py
