@@ -178,7 +178,7 @@ Your bot is now online 24/7 in a **serverless** environment. Cold starts are < 3
 
 Some things to note:  
 &nbsp;&nbsp;➔ Serverless means cache will not retain after ~5 minutes of inactivity.  
-&nbsp;&nbsp;➔ You also can't do things that require a persistent websocket, like listening for message/voice/member/guild events.  
+&nbsp;&nbsp;➔ You also can't do things that require a persistent websocket, like listening for message/voice/guild events.  
 &nbsp;&nbsp;➔ You may want to use 2 bots, 1 is a test bot with dev credentials locally, the other with prod credentials on Vercel.
 
 ### Now make it your own!
