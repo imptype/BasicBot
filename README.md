@@ -44,6 +44,9 @@ Invite the bot and test the features: https://discord.com/oauth2/authorize?clien
 ```
 
 # Running the bot
+A quick way to run your own instance of the bot is to click the Vercel Deploy Button:
+
+[![Deploy with Vercel](https://vercel.com/button)][1]
 
 ### Run Locally
 1. Make sure you have these first.
@@ -192,4 +195,5 @@ BasicBot is just a demonstration, so feel free to change the name and add more c
 - **Vercel Documentation:** https://vercel.com/docs
   - Read up other things you can do on Vercel.
 
-<!-- REFERENCES / TODO ? -->
+<!-- REFERENCES -->
+[1]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fimptype%2FBasicBot&env=DISCORD_APPLICATION_ID,DISCORD_PUBLIC_KEY,DISCORD_BOT_TOKEN,ERROR_LOG_WEBHOOK,SYNC_PASSWORD&envDescription=Read%20the%20README.md%20file%20to%20know%20what%20to%20put%20in%20each%20value.&project-name=basicbot&repository-name=BasicBot&demo-title=BasicBot%20Quick%20Deploy&demo-description=A%20quick%20way%20to%20deploy%20a%20serverless%20Python%20Discord%20bot%20on%20Vercel.&demo-url=https%3A%2F%2Fbasic-bot.vercel.app&demo-image=https%3A%2F%2Fi.imgur.com%2FwR99MHB.png
