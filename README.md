@@ -1,4 +1,6 @@
 # Information
+[![Deploy with Vercel](https://vercel.com/button)][1]
+
 This Discord bot is **SERVERLESS** which means it can run for **FREE** and be **ALWAYS** online on [Vercel](https://vercel.com)!  
 You can also treat this repository as a template for making serverless bots with the [discohook](https://github.com/jnsougata/discohook) library.
 
