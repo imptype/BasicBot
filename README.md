@@ -169,7 +169,7 @@ Remember:
    - Set Build Command to `uvicorn main:app`.
    - Set Install Command to `pip install -r requirements.txt`.
    - Paste all your environment variables from `config.json` into Environment Variables and click Deploy.
-   - NOTE: `vercel.json` uses an edited version of the NPM package `@vercel/python` to fix event loop issues.
+   - NOTE: `vercel.json` uses an [edited version](https://www.npmjs.com/package/@imptype/vercel-python) of the NPM package [`@vercel/python`](https://www.npmjs.com/package/@vercel/python) to fix event loop issues.
 
 3. Set the Interactions Endpoint URL to `<url>/interactions` where `url` is your Vercel URL.
    - Once deployed, click your preview box to know what your `123123123.vercel.app` URL is.
