@@ -184,7 +184,8 @@ Your bot is now online 24/7 in a **serverless** environment. Cold starts are < 3
 Some things to note:  
 &nbsp;&nbsp;➔ Serverless means cache will not retain after ~5 minutes of inactivity.  
 &nbsp;&nbsp;➔ You also can't do things that require a persistent websocket, like listening for message/voice/guild events.  
-&nbsp;&nbsp;➔ You may want to use 2 bots, 1 is a test bot with dev credentials locally, the other with prod credentials on Vercel.
+&nbsp;&nbsp;➔ You may want to use 2 bots, 1 is a test bot with dev credentials locally, the other with prod credentials on Vercel.  
+&nbsp;&nbsp;➔ If you want to be able to cache properly across multiple simultaneous serverless instances, use Redis / [Vercel KV](https://vercel.com/docs/storage/vercel-kv).
 
 ### Now make it your own!
 BasicBot is just a demonstration, so feel free to change the name and add more commands and do whatever you want. If you need inspiration for things to add or to know what's possible, check out the [discohook/examples](https://github.com/jnsougata/discohook/tree/main/examples) folder, which contains a lot of simple examples like modals, buttons, slash command arguments, etc. You can also check out [MazeRace](https://github.com/imptype/MazeRace), a small Discord bot that shows how to do things like storing variables inside of custom IDs, image generation, nested and persistent views, and uses a simple database.
